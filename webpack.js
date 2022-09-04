@@ -2,14 +2,9 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const dotenv = require('dotenv');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = () => {
-    const env = dotenv.config().parsed || {};
-    const envKeys = Object.keys(env).reduce((prev, next) => {
-        prev[`process.env.${next}`] = JSON.stringify(env[next]);
-        return prev;
-    }, {});
     return {
         mode: 'development',
         entry: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -48,13 +43,33 @@ module.exports = () => {
                     ],
                 },
                 {
+                    test: /\.less$/,
+                    use: [
+                        {
+                            loader: MiniCssExtractPlugin.loader,
+                        },
+                        'css-loader',
+                        'less-loader',
+                    ],
+                },
+                {
                     test: /\.jpe?g$|\.gif$|\.ico$|\.png$|\.svg$/,
-                    use: 'file-loader?name=[name].[ext]?[hash]',
+                    use: ['file-loader?name=[name].[ext]?[hash]'],
+                },
+                {
+                    test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                    use: [
+                        'url-loader?limit=10000&mimetype=application/font-woff',
+                    ],
+                },
+                {
+                    test: /\.(ttf|eot|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                    loader: 'file-loader',
                 },
             ],
         },
         plugins: [
-            new webpack.DefinePlugin(envKeys),
+            new Dotenv(),
             new webpack.ProvidePlugin({
                 react: 'react',
                 'react-dom': 'react-dom',
@@ -68,6 +83,9 @@ module.exports = () => {
         ],
         resolve: {
             extensions: ['.ts', '.tsx', '.js'],
+            alias: {
+                process: 'process/browser',
+            },
         },
     };
 };

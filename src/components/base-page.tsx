@@ -2,7 +2,7 @@ import React, { FunctionComponent, useContext } from 'react';
 import { Redirect, Route, RouteProps, Switch } from 'react-router-dom';
 
 import { AuthContext } from '../contexts';
-import { Login, NavigationBar } from './';
+import { Dashboard, Intro, NavigationBar } from './';
 
 const UserRoute = (args: RouteProps): JSX.Element => {
     const { user } = useContext(AuthContext);
@@ -17,7 +17,7 @@ const UserRoute = (args: RouteProps): JSX.Element => {
 const PublicPages: FunctionComponent<{}> = () => {
     return (
         <Switch>
-            <Route component={Login} />
+            <Route component={Intro} />
         </Switch>
     );
 };
@@ -31,14 +31,15 @@ const PrivatePages: FunctionComponent<{}> = () => {
 
     return (
         <Switch>
-            <UserRoute path="/" component={Login} />
+            <UserRoute path="/dashboard" component={Dashboard} />
+            <UserRoute path="/" component={Dashboard} />
         </Switch>
     );
 };
 
 export const BasePage: FunctionComponent<{}> = () => {
     const { user, isInitializing } = useContext(AuthContext);
-    console.log('qwe', user, isInitializing)
+
     if (isInitializing) {
         return <div>loading</div>;
     }

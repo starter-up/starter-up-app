@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { Header, Menu } from 'semantic-ui-react';
 import styled from 'styled-components';
 
+import { CONSTANTS } from '../constants';
 import { AuthContext } from '../contexts';
-import { CONSTANTS } from './constants';
 
 const LinkLabel = styled(NavLink)`
     color: rgba(255, 255, 255, 0.9);

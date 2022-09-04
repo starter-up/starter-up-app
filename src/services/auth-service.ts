@@ -1,13 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export interface User {
-    name: string;
-}
+import { User, UserType } from '../schemas';
 
 export class AuthService {
     public static async authenticateFirebase(firebaseToken: string): Promise<{
         token: string;
         user: User;
     }> {
-        return { token: 'temp-token', user: { name: 'temp-name' } };
+        const stubbedType: UserType = 'technology';
+        const stubbedUser = {
+            screenName: 'screen-name',
+            type: stubbedType,
+        };
+
+        return { token: 'temp-token', user: stubbedUser };
     }
 }

@@ -8,7 +8,11 @@ export interface IdeaMember {
 export interface User {
     uuid: string;
     screenName: string;
+    summary: string;
+    email: string;
+    linkedIn?: string;
     type: UserType;
+    lastActive: string;
 }
 
 export interface Idea {

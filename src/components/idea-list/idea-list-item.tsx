@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { CONSTANTS } from '../../constants';
 import { Idea, IdeaMember } from '../../schemas';
+import { Pill } from '../';
 
 const Wrapper = styled.div`
     padding: 20px;
@@ -36,14 +37,6 @@ const BottomWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: end;
-`;
-
-const MembersNeededWrapper = styled.div`
-    background-color: ${CONSTANTS.COLORS.red};
-    color: ${CONSTANTS.COLORS.white};
-    border-radius: 30px;
-    padding: 2px 10px;
-    margin-right: 5px;
 `;
 
 interface IdeaListItemProps {
@@ -81,9 +74,9 @@ export const IdeaListItem: React.FC<IdeaListItemProps> = (props) => {
                     {Object.entries(membersNeeded).map(
                         ([type, count], index) => {
                             return (
-                                <MembersNeededWrapper key={index}>
+                                <Pill key={index}>
                                     {type} x {count}
-                                </MembersNeededWrapper>
+                                </Pill>
                             );
                         },
                     )}

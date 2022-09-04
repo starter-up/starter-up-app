@@ -37,6 +37,7 @@ const GoogleButton = styled(Button)`
         justify-content: space-evenly;
         background-color: ${CONSTANTS.COLORS.white};
         border-radius: 20px;
+        box-shadow: 0em 0px 5px 5px #00000025;
     }
 `;
 
@@ -61,7 +62,6 @@ const GoogleButtonWrapper = styled.div`
     display: flex;
     justify-content: center;
     padding-top: 20px;
-    box-shadow: 0em 0px 5px 5px #00000025;
 `;
 
 export const Intro: React.FC = () => {

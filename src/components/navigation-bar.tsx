@@ -77,8 +77,8 @@ export const NavigationBar = () => {
             <NavBarPlaceholder />
             <NavbarContainer fixed="top">
                 <Header>
-                    <LinkLabel to="/ideas" activeClassName="active">
-                        Ideas
+                    <LinkLabel to="/projects" activeClassName="active">
+                        Projects
                     </LinkLabel>
                     <LinkLabel to="/members" activeClassName="active">
                         Members

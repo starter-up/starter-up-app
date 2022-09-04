@@ -1,18 +1,8 @@
 import React, { FunctionComponent, useContext } from 'react';
-import { Redirect, Route, RouteProps, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { AuthContext } from '../contexts';
-import { Dashboard, Intro, NavigationBar } from './';
-
-const UserRoute = (args: RouteProps): JSX.Element => {
-    const { user } = useContext(AuthContext);
-
-    if (user) {
-        return <Route component={args.component} />;
-    } else {
-        return <Redirect to={{ pathname: '/' }} />;
-    }
-};
+import { IdeaList, Intro, NavigationBar } from './';
 
 const PublicPages: FunctionComponent<{}> = () => {
     return (
@@ -28,11 +18,18 @@ const PrivatePages: FunctionComponent<{}> = () => {
     if (!user) {
         return null;
     }
-
+    console.log('qweeee');
     return (
         <Switch>
-            <UserRoute path="/dashboard" component={Dashboard} />
-            <UserRoute path="/" component={Dashboard} />
+            <Route exact path="/ideas" component={IdeaList} />
+            <Route
+                path="/"
+                render={(): JSX.Element => {
+                    console.log('redirecting aaa')
+                    return <Redirect to="/ideas" />;
+                }}
+            />
+            <Route render={() => <div>Not found</div>} />
         </Switch>
     );
 };

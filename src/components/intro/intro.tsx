@@ -44,6 +44,7 @@ const Logo = styled(Header)`
     &&&&& {
         color: ${CONSTANTS.COLORS.white};
         font-size: 6em;
+        text-shadow: 0px 5px 5px #00000021;
     }
 `;
 
@@ -51,6 +52,7 @@ const SubHeader = styled(Header)`
     &&&& {
         color: ${CONSTANTS.COLORS.white};
         font-size: 3em;
+        text-shadow: 0px 5px 5px #00000021;
     }
 `;
 
@@ -59,6 +61,7 @@ const GoogleButtonWrapper = styled.div`
     display: flex;
     justify-content: center;
     padding-top: 20px;
+    box-shadow: 0em 0px 5px 5px #00000025;
 `;
 
 export const Intro: React.FC = () => {

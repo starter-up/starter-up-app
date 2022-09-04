@@ -2,7 +2,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 
 import { BasePage } from './components';
 import { AuthProvider } from './contexts';
@@ -18,9 +18,11 @@ const root = createRoot(rootElement);
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <AuthProvider>
-                <BasePage />
-            </AuthProvider>
+            <Switch>
+                <AuthProvider>
+                    <BasePage />
+                </AuthProvider>
+            </Switch>
         </BrowserRouter>
     </React.StrictMode>,
 );

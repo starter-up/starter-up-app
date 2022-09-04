@@ -52,14 +52,11 @@ const LogoutLabel = styled(NavLink)`
 
 const NavbarContainer = styled(Menu)`
     && {
-        height: 74px;
-        background-color: grey;
-        display: block;
-        color: rgba(255, 255, 255, 1);
-        padding: 25px 68px 16px;
-        box-shadow: 0 2px 2px 0 rgba(25, 40, 63, 0.3);
-        transform: translate3d(0, 0, 0);
-
+        background-color: ${CONSTANTS.COLORS.blue};
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        justify-content: right;
         .ui.header {
             font-family: ${CONSTANTS.FONT.header};
         }
@@ -68,7 +65,7 @@ const NavbarContainer = styled(Menu)`
 
 const NavBarPlaceholder = styled.div`
     position: relative;
-    height: 73px;
+    height: 40px;
 `;
 
 export const NavigationBar = () => {
@@ -80,24 +77,19 @@ export const NavigationBar = () => {
             <NavBarPlaceholder />
             <NavbarContainer fixed="top">
                 <Header>
-                    <div className="right">
-                        <LinkLabel to="/dashboard" activeClassName="active">
-                            Dashboard
-                        </LinkLabel>
-                        <LinkLabel to="/ideas" activeClassName="active">
-                            Ideas
-                        </LinkLabel>
-                        <LinkLabel to="/members" activeClassName="active">
-                            Members
-                        </LinkLabel>
-                        <LogoutLabel
-                            to="/"
-                            onClick={logout}
-                            activeClassName="active"
-                        >
-                            Logout
-                        </LogoutLabel>
-                    </div>
+                    <LinkLabel to="/ideas" activeClassName="active">
+                        Ideas
+                    </LinkLabel>
+                    <LinkLabel to="/members" activeClassName="active">
+                        Members
+                    </LinkLabel>
+                    <LogoutLabel
+                        to="/"
+                        onClick={logout}
+                        activeClassName="active"
+                    >
+                        Logout
+                    </LogoutLabel>
                 </Header>
             </NavbarContainer>
         </>

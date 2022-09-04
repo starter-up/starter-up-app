@@ -5,3 +5,4 @@ export * from './navigation-bar';
 export * from './idea-list';
 export * from './member-list';
 export * from './ui';
+export * from './register';

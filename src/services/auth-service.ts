@@ -8,6 +8,7 @@ export class AuthService {
         const stubbedType: UserType = 'technology';
         const stubbedUser = {
             uuid: 'qwe',
+            email: 'qwe',
             screenName: 'screen-name',
             type: stubbedType,
         };

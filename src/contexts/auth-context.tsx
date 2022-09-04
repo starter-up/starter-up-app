@@ -8,7 +8,8 @@ import {
 import React, { createContext, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 
-import { AuthService, Axios, FirebaseService, User } from '../services';
+import { User } from '../schemas';
+import { AuthService, Axios, FirebaseService } from '../services';
 
 export interface UserAuthContext {
     token: string;

@@ -4,7 +4,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
-import { Login } from './components';
+import { BasePage } from './components';
 import { AuthProvider } from './contexts';
 
 const rootElement = document.getElementById('root');
@@ -19,7 +19,7 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <AuthProvider>
-                <Login />
+                <BasePage />
             </AuthProvider>
         </BrowserRouter>
     </React.StrictMode>,

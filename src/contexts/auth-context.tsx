@@ -1,19 +1,12 @@
-import axios, {
-    AxiosError,
-    AxiosInstance,
-    AxiosRequestConfig,
-    AxiosResponse,
-} from 'axios';
-import firebase from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, User as FirebaseUser } from 'firebase/auth';
-import React, {
-    createContext,
-    FunctionComponent,
-    useEffect,
-    useRef,
-    useState,
-} from 'react';
-import { useNavigate } from 'react-router';
+import axios, { AxiosInstance } from 'axios';
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    User as FirebaseUser,
+} from 'firebase/auth';
+import React, { createContext, useEffect, useRef, useState } from 'react';
+import { useHistory } from 'react-router';
 
 import { AuthService, Axios, FirebaseService, User } from '../services';
 
@@ -25,8 +18,12 @@ export interface UserAuthContext {
     isInitializing: boolean;
 }
 
+if (!process.env.API_HOST) {
+    throw new Error('API_HOST env not found');
+}
+
 const instance: AxiosInstance = axios.create({
-    baseURL: `${process.env.THERMA_API_HOST || 'http://localhost:8999'}/api`,
+    baseURL: `${process.env.API_HOST}/api`,
 });
 
 export const atkaRequest = instance;
@@ -50,7 +47,9 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [isInitializing, setIsInitializing] = useState<boolean>(true);
     const atkaToken = useRef<string | null>(null);
-    const navigate = useNavigate();
+    const history = useHistory();
+    const firebaseApp = new FirebaseService().app;
+    const auth = getAuth(firebaseApp);
 
     const backendAuth = async (idToken: string) => {
         try {
@@ -67,10 +66,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     };
 
     const firebaseLogin = async () => {
-        const { user } = await signInWithPopup(
-            getAuth(),
-            new GoogleAuthProvider(),
-        );
+        const { user } = await signInWithPopup(auth, new GoogleAuthProvider());
 
         if (!user) {
             throw new Error('no user in firebase auth');
@@ -86,21 +82,20 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     };
 
     const logout = async () => {
-        await getAuth().signOut();
+        await auth.signOut();
         Axios.cancellAlRequests();
         setUser(null);
         setToken('');
-        return navigate('/');
+        return history.push('/');
     };
 
     useEffect(() => {
-        new FirebaseService().app;
-        getAuth().onAuthStateChanged(async (profile: FirebaseUser | null) => {
+        auth.onAuthStateChanged(async (profile: FirebaseUser | null) => {
             if (!profile) {
                 setIsInitializing(false);
                 return;
             }
-            const { currentUser } = getAuth();
+            const { currentUser } = auth;
             if (!currentUser) {
                 setIsInitializing(false);
                 return;

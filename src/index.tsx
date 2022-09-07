@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { BasePage } from './components';
 import { AuthProvider } from './contexts';
+import { Store } from './store';
 
 const rootElement = document.getElementById('root');
 
@@ -17,10 +18,12 @@ const root = createRoot(rootElement);
 
 root.render(
     <Router>
-        <Switch>
-            <AuthProvider>
-                <BasePage />
-            </AuthProvider>
-        </Switch>
+        <Store>
+            <Switch>
+                <AuthProvider>
+                    <BasePage />
+                </AuthProvider>
+            </Switch>
+        </Store>
     </Router>,
 );

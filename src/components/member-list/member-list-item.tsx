@@ -24,7 +24,9 @@ const Title = styled(Header)`
 
 const Description = styled.div`
     && {
+        max-height: 60px;
         font-family: ${CONSTANTS.FONT.header}, calibri;
+        overflow-y: hidden;
     }
 `;
 
@@ -45,10 +47,10 @@ export const MemberListItem: React.FC<MemberListItemProps> = (props) => {
     return (
         <Wrapper>
             <Title>{screenName}</Title>
+            <div>Last seen: {lastActive}</div>
             <Description>{summary}</Description>
             <BottomWrapper>
                 <Pill>{type}</Pill>
-                <div>{lastActive}</div>
             </BottomWrapper>
         </Wrapper>
     );

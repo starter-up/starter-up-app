@@ -2,7 +2,7 @@ import React, { FunctionComponent, useContext } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { AuthContext } from '../contexts';
-import { IdeaList, Intro, MemberList, NavigationBar, Register } from './';
+import { ProjectList, Intro, MemberList, NavigationBar, Register } from './';
 
 const PublicPages: FunctionComponent<{}> = () => {
     return (
@@ -21,7 +21,7 @@ const PrivatePages: FunctionComponent<{}> = () => {
 
     return (
         <Switch>
-            <Route exact path="/projects" component={IdeaList} />
+            <Route exact path="/projects" component={ProjectList} />
             <Route exact path="/members" component={MemberList} />
             <Route
                 path="/"

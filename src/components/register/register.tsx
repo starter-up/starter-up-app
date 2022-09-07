@@ -71,7 +71,7 @@ export const Register: React.FC = () => {
     const [portfolio, setPortfolio] = useState('');
     const [portfolioError, setPortfolioError] = useState('');
 
-    const onSubmit = (data) => console.log('qqq', data, errors);
+    const onSubmit = (data) => console.log('submitting', data, errors);
 
     const handleAddPortfolio = () => {
         if (!portfolio) {

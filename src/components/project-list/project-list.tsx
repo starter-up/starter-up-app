@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { CONSTANTS } from '../../constants';
-import { StoreContext, useMemberService } from '../../store';
-import { MemberListItem } from './member-list-item';
+import { StoreContext, useProjectService } from '../../store';
+import { ProjectListItem } from './project-list-item';
 
 const Background = styled.div`
     padding: 50px 20% 10px;
@@ -11,25 +11,25 @@ const Background = styled.div`
     min-height: 100vh;
 `;
 
-export const MemberList: React.FC = () => {
+export const ProjectList: React.FC = () => {
     const { store } = useContext(StoreContext);
-    const { members } = store.entities;
-    const { browseMembers } = useMemberService();
+    const { projects } = store.entities;
+    const { browseProjects } = useProjectService();
 
     useEffect(() => {
         (async () => {
-            await browseMembers();
+            await browseProjects();
         })();
     }, []);
 
     return (
         <Background>
-            {members.all.length > 0 &&
-                members.all.map((member, index) => {
+            {projects.all.length > 0 &&
+                projects.all.map((project, index) => {
                     return (
-                        <MemberListItem
+                        <ProjectListItem
                             key={index}
-                            member={members.byUUID[member]}
+                            project={projects.byUUID[project]}
                         />
                     );
                 })}

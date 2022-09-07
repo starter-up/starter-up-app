@@ -3,8 +3,8 @@ import { Header } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 import { CONSTANTS } from '../../constants';
-import { Idea, IdeaMember } from '../../schemas';
-import { Pill } from '../';
+import { ProjectMember, ProjectModel } from '../../services';
+import { Pill } from '..';
 
 const Wrapper = styled.div`
     padding: 20px;
@@ -24,7 +24,9 @@ const IdeaTitle = styled(Header)`
 
 const Description = styled.div`
     && {
+        max-height: 60px;
         font-family: ${CONSTANTS.FONT.header}, calibri;
+        overflow-y: hidden;
     }
 `;
 
@@ -39,21 +41,21 @@ const BottomWrapper = styled.div`
     align-items: end;
 `;
 
-interface IdeaListItemProps {
-    idea: Idea;
+interface ProjectListItemProps {
+    project: ProjectModel;
 }
 
 interface MembersNeeded {
     [key: string]: number;
 }
 
-export const IdeaListItem: React.FC<IdeaListItemProps> = (props) => {
-    const { name, description, members, updatedAt } = props.idea;
+export const ProjectListItem: React.FC<ProjectListItemProps> = (props) => {
+    const { name, description, members, updatedAt } = props.project;
     const [membersNeeded, setMembersNeeded] = useState<MembersNeeded>({});
 
     useEffect(() => {
         const cache = members.reduce(
-            (acc: MembersNeeded, { userUuid, userType }: IdeaMember) => {
+            (acc: MembersNeeded, { userUuid, userType }: ProjectMember) => {
                 if (userUuid) {
                     return acc;
                 }
@@ -81,7 +83,7 @@ export const IdeaListItem: React.FC<IdeaListItemProps> = (props) => {
                         },
                     )}
                 </MembersWrapper>
-                <div>{updatedAt}</div>
+                <div>{updatedAt.toISOString()}</div>
             </BottomWrapper>
         </Wrapper>
     );
